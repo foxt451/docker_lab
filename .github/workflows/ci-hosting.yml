@@ -3,8 +3,6 @@ name: CI for Hosting Code Base
 on:
   pull_request:
     branches: ["main"]
-    paths-ignore:
-      - "functions/**/*"
 # cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}

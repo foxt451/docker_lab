@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "tsc",
-    "build:docker": "docker build -t docker-labs-hosting ."
+    "build:docker": "docker build -t docker-labs-hosting .",
+    "push:docker": "docker tag docker-labs-hosting:latest foxt451/devops:latest && docker push foxt451/devops:latest"
   },
   "repository": {
     "type": "git",

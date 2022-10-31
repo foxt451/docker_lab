@@ -7,7 +7,8 @@
     "eslint:check": "eslint --ignore-path .gitignore --cache",
     "prettier:fix": "prettier --cache --write --ignore-path .gitignore",
     "prettier:check": "prettier --check --cache --ignore-path .gitignore",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:docker:hosting": "cd hosting && npm run build:docker"
   },
   "repository": {
     "type": "git",

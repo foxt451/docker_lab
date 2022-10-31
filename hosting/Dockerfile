@@ -7,7 +7,7 @@ COPY ./tsconfig.json .
 COPY ./src ./src
 RUN npm run build
 
-FROM node:18.8.0-alpine
+FROM node:16-alpine
 WORKDIR /app
 COPY ./package.json ./package-lock.json ./
 ENV NODE_ENV production

@@ -4,6 +4,5 @@ node_modules
 build
 .git
 .gitignore
+.eslintrc.js
 README.md
-.husky
-fly.toml

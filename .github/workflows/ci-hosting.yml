@@ -68,8 +68,8 @@ jobs:
       - name: Pull image
         run: docker pull foxt451/devops:latest
       - name: Run image
-        run: docker run -d -m 256m --cpus="2" -e PORT=80 -p 80:80 foxt451/devops:latest
+        run: docker run -d -m 256m --cpus="2" -e PORT=80 -p 80:80 --network devops --network-alias hosting foxt451/devops:latest
       - name: Wait for it to start
-        run: docker run willwill/wait-for-it http://localhost:80 -t 10 -s -- echo "App is up"
+        run: docker run --network devops willwill/wait-for-it http://hosting:80 -t 10 -s -- echo "App is up"
       - name: Test curl
         run: curl http://localhost:80 --fail-with-body

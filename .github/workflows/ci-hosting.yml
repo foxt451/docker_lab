@@ -67,6 +67,8 @@ jobs:
     steps: 
       - name: Pull image
         run: docker pull foxt451/devops:latest
+      - name: Create network
+        run: docker network create --driver bridge devops
       - name: Run image
         run: docker run -d -m 256m --cpus="2" -e PORT=80 -p 80:80 --network devops --network-alias hosting foxt451/devops:latest
       - name: Wait for it to start

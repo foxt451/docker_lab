@@ -19,3 +19,8 @@ or
 # To run app locally
 
 `cd hosting && npm start`
+
+# K8S
+
+1. `kubectl apply -f k8s/`
+2. `minikube service helloworld --url`

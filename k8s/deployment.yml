@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+        - name: helloworld-nodejs
+          image: foxt451/devops:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+              name: hw-nodejs
+          livenessProbe:
+            httpGet:
+              path: /
+              port: hw-nodejs
+            initialDelaySeconds: 5
+            periodSeconds: 5
+        - name: nginx
+          image: nginx
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "300m"
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+          - mountPath: /etc/nginx # mount nginx-conf volume to /etc/nginx
+            readOnly: true
+            name: nginx-conf
+          - mountPath: /var/log/nginx
+            name: log
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf # place ConfigMap `nginx-conf` on /etc/nginx
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+              - key: virtualhost.conf
+                path: virtualhost/virtualhost.conf
+        - name: log
+          emptyDir: {}
